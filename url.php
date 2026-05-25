@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PhpMyAdmin\Common;
-use PhpMyAdmin\Routing;
+use PhpMyAdmin\UrlRedirector;
 
 if (! defined('ROOT_PATH')) {
     // phpcs:disable PSR1.Files.SideEffects
@@ -35,9 +35,8 @@ if (! @is_readable(AUTOLOAD_FILE)) {
 
 require AUTOLOAD_FILE;
 
-global $route, $containerBuilder, $request;
+$isMinimumCommon = true;
 
 Common::run();
 
-$dispatcher = Routing::getDispatcher();
-Routing::callControllerForRoute($request, $route, $dispatcher, $containerBuilder);
+UrlRedirector::redirect();
